@@ -28,8 +28,8 @@ class MoviesController < ApplicationController
   end
 
   def movie_params
-    params.require(:movie).permit(:title, :rating, :description, :release_date)
-  end  
+    params.require(:movie).permit(:title,:rating,:release_date)
+  end
 
   def edit
     @movie = Movie.find params[:id]
