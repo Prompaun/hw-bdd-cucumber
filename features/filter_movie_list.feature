@@ -23,6 +23,7 @@ Background: movies have been added to database
   Then 10 seed movies should exist
 
 Scenario: restrict to movies with "PG" or "R" ratings
+  Given I am on the home page
   #And I check the "PG" checkbox
   #Then complete the rest of of this scenario
   # enter step(s) to check the 'PG' and 'R' checkboxes
@@ -42,7 +43,7 @@ Scenario: restrict to movies with "PG" or "R" ratings
 
 Scenario: all ratings selected
   # your steps here
-  Then complete the rest of of this 
+  #Then complete the rest of of this 
   Given I am on the RottenPotatoes home page
   When I check the following ratings: PG, R, G, PG-13
   Then I should see all the movies
