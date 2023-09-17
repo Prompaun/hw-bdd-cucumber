@@ -26,7 +26,7 @@ Scenario: restrict to movies with "PG" or "R" ratings
   #And I check the "PG" checkbox
   #Then complete the rest of of this scenario
   # enter step(s) to check the 'PG' and 'R' checkboxes
-  #When I check the following ratings: PG, R
+  When I check the following ratings: PG, R
 
   # enter step(s) to uncheck all other checkboxes
   When I uncheck the following ratings: G, PG-13
