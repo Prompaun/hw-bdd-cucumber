@@ -24,10 +24,8 @@ group :development, :test do
   gem 'capybara'         # lets Cucumber pretend to be a web browser
   gem 'launchy'          # a useful debugging aid for user stories
   gem 'rspec-rails'
-
   gem 'pry'
   gem 'pry-byebug'
-
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.3.6'
 end
@@ -36,3 +34,8 @@ group :production do
   gem 'pg', '~> 0.2'
   gem 'rails_12factor'
 end
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection", "~> 1.0"
