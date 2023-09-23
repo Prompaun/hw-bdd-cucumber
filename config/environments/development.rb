@@ -15,7 +15,7 @@ Rottenpotatoes::Application.configure do
   config.eager_load = false
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
 
   # Enable server timing
   config.server_timing = true

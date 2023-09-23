@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.6.6'
-gem 'rails', '4.2.11'
+ruby '2.6.10'
+gem 'rails', '5.2'
 
 
 gem 'sass-rails', '~> 5.0.3'
@@ -9,6 +9,9 @@ gem 'uglifier', '>= 2.7.1'
 
 gem 'jquery-rails'
 gem 'tzinfo-data'
+gem 'execjs'
+gem 'therubyracer' # หรือ gem 'mini_racer'
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -28,6 +31,7 @@ group :development, :test do
   gem 'pry-byebug'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.3.6'
+  gem 'dotenv-rails'
 end
 
 group :production do

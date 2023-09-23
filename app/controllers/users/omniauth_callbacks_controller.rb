@@ -10,6 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
     user = User.from_omniauth(auth)
+    #target_url = Google::Auth::WebUserAuthorizer.handle_auth_callback_deferred(request)
+    #redirect target_url
     if user.present?
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
@@ -40,6 +42,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
+
+  protected
 
   def after_omniauth_failure_path_for(_scope)
     new_user_session_path

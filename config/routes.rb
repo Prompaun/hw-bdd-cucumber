@@ -1,9 +1,12 @@
 Rottenpotatoes::Application.routes.draw do
-  get 'pages/home'
+  #get 'pages/home'
   resources :movies
   # map '/' to be a redirect to '/movies'
-  root :to => redirect('/movies')
-
+  root to: 'movies#index'
+  #root :to => redirect('/movies')
+  #root :to => redirect('/users/sign_in')
+  #root :to => redirect(new_user_session_path)
+  
   devise_for :users, controllers: {
     registrations:'users/registrations',
     sessions: 'users/sessions',
