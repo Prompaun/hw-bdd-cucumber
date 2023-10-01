@@ -53,5 +53,9 @@
       <% end %>
     </tbody>
   </table>
+  
   <%= link_to 'Add new movie', new_movie_path, class: 'btn btn-primary' %>
+<% else %>
+<%= link_to "Login", new_user_session_path , style: "margin-right: 5px;" %>
+<%= link_to "Create Account", new_user_registration_path %>
 <% end %>
