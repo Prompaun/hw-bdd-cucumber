@@ -1,5 +1,23 @@
+Tmdb::Api.key(ENV["APIKEY_TMDB"])
+
 class MoviesController < ApplicationController
   before_action :force_index_redirect, only: [:index]
+
+
+  def search_tmdb
+    @movie_name = params[:movie][:title]
+    @movies = Movie.where("title LIKE ?", "%#{@movie_name}%")
+    
+    if @movies.present?
+      # หากพบข้อมูล
+      @movie = @movies.first
+      redirect_to movie_path(@movie)
+    else
+      # หากไม่พบข้อมูล
+      flash[:notice] = " '#{@movie_name}' was not found in the database."
+      redirect_to movies_path
+    end
+  end
 
   def show
     id = params[:id] # retrieve movie ID from URI route
@@ -16,20 +34,51 @@ class MoviesController < ApplicationController
     session['ratings'] = ratings_list
     session['sort_by'] = @sort_by
   end
+  # def set_ratings
+  #   @all_ratings = Movie.all_ratings
+  # end
+
+  # def index
+  #   set_ratings
+  #   @search_term = params[:search_term]
+  #   if @search_term.present?
+  #     @movies = Movie.where("title LIKE ?", "%#{@search_term}%")
+  #   else
+  #     @movies = Movie.all
+  #   end
+  # end
 
   def new
-    # default: render 'new' template
+    if params[:movie]
+      @movie = Movie.new(movie_params)
+    end
+    # # default: render 'new' template
+    # @movie_title = params[:name]
+    # @movie_rate = params[:rate] 
+    # @movie_date = params[:date] || Date.today.strftime()
   end
 
   def create
-    @movie = Movie.create!(movie_params)
-    flash[:notice] = "#{@movie.title} was successfully created."
-    redirect_to movies_path
+    release_date = DateTime.new(params[:movie]["release_date(1i)"].to_i, params[:movie]["release_date(2i)"].to_i, params[:movie]["release_date(3i)"].to_i)
+    
+    existing_movie = Movie.find_by(title: params[:movie][:title], release_date: release_date)
+    
+    if existing_movie
+      flash[:notice] = "Movie '#{existing_movie.title}' with the same name and release date already exists."
+      redirect_to movies_path and return
+    end
+  
+    @movie = Movie.new(movie_params.merge(release_date: release_date))
+  
+    if @movie.save
+      flash[:notice] = "#{@movie.title} was successfully created."
+      redirect_to movies_path
+    else
+      render 'new'
+    end
   end
-
-  def movie_params
-    params.require(:movie).permit(:title,:rating,:release_date)
-  end
+  
+  
 
   def edit
     @movie = Movie.find params[:id]
@@ -69,5 +118,9 @@ class MoviesController < ApplicationController
 
   def sort_by
     params[:sort_by] || session[:sort_by] || 'id'
+  end
+
+  def movie_params
+    params.require(:movie).permit(:title, :rating, :description, :release_date)
   end
 end
