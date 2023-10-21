@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2023_09_25_133704) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.date "reset_password_sent_at"
+    t.date "remember_created_at"
     t.string "full_name"
     t.string "uid"
     t.string "avatar_url"
@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(version: 2023_09_25_133704) do
     t.string "title"
     t.string "rating"
     t.text "description"
-    t.datetime "release_date"
+    t.date "release_date"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_movies_on_title", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -1,5 +1,4 @@
-# Run 'rails generate migration create_reviews' and then
-#   edit db/migrate/*_create_reviews.rb to look like this:
+# Run 'rails generate migration create_reviews'
 class CreateReviews < ActiveRecord::Migration[5.2]
   def change
     create_table 'reviews' do |t|

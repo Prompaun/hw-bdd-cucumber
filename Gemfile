@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'tzinfo-data'
 gem 'execjs'
 gem 'therubyracer' # หรือ gem 'mini_racer'
+# gem 'dotenv-rails', groups: [:development, :test]
 
 
 group :development do
